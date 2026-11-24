@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#16070A">
+  <meta name="color-scheme" content="dark light">
+  <title>Angie Silupu · 22 · Invitación</title>
+  <meta name="description" content="Estás cordialmente invitado a celebrar los 22 años de Angie Silupu. Viernes 27 de noviembre, costa de Piura.">
+
+  <!-- Vista previa al compartir por WhatsApp / redes -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Angie Silupu · 22 años">
+  <meta property="og:description" content="Viernes 27 de noviembre · Costa de Piura. Abre tu invitación.">
+  <!-- Al publicar, cambia esto por la URL absoluta: https://tu-dominio/assets/fotos/angie-2.jpg -->
+  <meta property="og:image" content="assets/fotos/angie-2.jpg">
+  <link rel="preload" as="image" href="assets/fotos/fondo-portada.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-locked">
+
+  <!-- ============ SPRITE SVG: lazo de seda + líneas de marea ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Lazo de cinta de seda, trazo fino 1.2px -->
+      <symbol id="bow" viewBox="0 0 120 64">
+        <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path vector-effect="non-scaling-stroke" d="M60 28 C50 14 30 4 20 12 C10 20 16 34 32 34 C44 34 54 31 60 28"/>
+          <path vector-effect="non-scaling-stroke" d="M58 27 C48 20 34 15 26 18"/>
+          <path vector-effect="non-scaling-stroke" d="M60 28 C70 14 90 4 100 12 C110 20 104 34 88 34 C76 34 66 31 60 28"/>
+          <path vector-effect="non-scaling-stroke" d="M62 27 C72 20 86 15 94 18"/>
+          <ellipse vector-effect="non-scaling-stroke" cx="60" cy="29" rx="4.2" ry="5.2"/>
+          <path vector-effect="non-scaling-stroke" d="M57 33 C52 43 45 52 35 60"/>
+          <path vector-effect="non-scaling-stroke" d="M59.5 34 C56 44 50 53 42 61"/>
+          <path vector-effect="non-scaling-stroke" d="M35 60 L40 57 L42 61"/>
+          <path vector-effect="non-scaling-stroke" d="M63 33 C68 43 75 52 85 60"/>
+          <path vector-effect="non-scaling-stroke" d="M60.5 34 C64 44 70 53 78 61"/>
+          <path vector-effect="non-scaling-stroke" d="M85 60 L80 57 L78 61"/>
+        </g>
+      </symbol>
+
+      <!-- Ondas topográficas (marea) -->
+      <symbol id="tide" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice">
+        <g fill="none" stroke="currentColor" stroke-width="1">
+          <path vector-effect="non-scaling-stroke" opacity="1"   d="M-200 60  C 40 20, 280 100, 520 60 S 1000 20, 1240 60 S 1640 100, 1640 60"/>
+          <path vector-effect="non-scaling-stroke" opacity=".85" d="M-200 104 C 60 62, 300 144, 540 104 S 1020 62, 1260 104 S 1640 144, 1640 104"/>
+          <path vector-effect="non-scaling-stroke" opacity=".7"  d="M-200 150 C 80 106, 320 190, 560 150 S 1040 106, 1280 150 S 1640 190, 1640 150"/>
+          <path vector-effect="non-scaling-stroke" opacity=".58" d="M-200 198 C 100 152, 340 238, 580 198 S 1060 152, 1300 198 S 1640 238, 1640 198"/>
+          <path vector-effect="non-scaling-stroke" opacity=".46" d="M-200 248 C 120 200, 360 288, 600 248 S 1080 200, 1320 248 S 1640 288, 1640 248"/>
+          <path vector-effect="non-scaling-stroke" opacity=".34" d="M-200 300 C 140 250, 380 340, 620 300 S 1100 250, 1340 300 S 1640 340, 1640 300"/>
+          <path vector-effect="non-scaling-stroke" opacity=".22" d="M-200 354 C 160 302, 400 394, 640 354 S 1120 302, 1360 354 S 1640 394, 1640 354"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Grano cinematográfico global -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ CONTROL DE AUDIO FLOTANTE ============ -->
+  <button class="audio-toggle is-paused" id="audioToggle" type="button" aria-pressed="false" aria-label="Reproducir música" hidden>
+    <svg class="audio-toggle__disc" viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 4" opacity=".55"/>
+    </svg>
+    <span class="audio-toggle__bars" aria-hidden="true">
+      <i></i><i></i><i></i><i></i>
+    </span>
+  </button>
+
+  <!-- =====================================================
+       ETAPA 1 · EL SOBRE / PORTADA EDITORIAL (100dvh)
+       ===================================================== -->
+  <section class="cover" id="cover" aria-label="Portada de la invitación">
+    <!-- Fondo de playa (assets/fotos/fondo-portada.jpg) partido en dos puertas -->
+    <div class="cover__flap cover__flap--left" aria-hidden="true"><div class="cover__bg"></div></div>
+    <div class="cover__flap cover__flap--right" aria-hidden="true"><div class="cover__bg"></div></div>
+
+    <!-- Globos flotantes dorados y vino -->
+    <div class="balloons" aria-hidden="true">
+      <span class="balloon balloon--gold" style="--x:6%;  --s:1.05; --d:15s; --delay:-2s"></span>
+      <span class="balloon balloon--wine" style="--x:18%; --s:.8;  --d:18s; --delay:-9s"></span>
+      <span class="balloon balloon--gold" style="--x:30%; --s:.65; --d:21s; --delay:-14s"></span>
+      <span class="balloon balloon--wine" style="--x:70%; --s:.7;  --d:19s; --delay:-5s"></span>
+      <span class="balloon balloon--gold" style="--x:82%; --s:.95; --d:16s; --delay:-11s"></span>
+      <span class="balloon balloon--wine" style="--x:93%; --s:1.1; --d:17s; --delay:-1s"></span>
+    </div>
+
+    <div class="cover__frame" aria-hidden="true">
+      <span class="corner corner--tl"></span><span class="corner corner--tr"></span>
+      <span class="corner corner--bl"></span><span class="corner corner--br"></span>
+    </div>
+
+    <div class="cover__inner">
+      <div class="portrait" role="img" aria-label="Foto de Angie con su corona">
+        <span class="portrait__photo"></span>
+      </div>
+
+      <p class="cover__lead"><span class="cover__guest" id="guestGreeting" hidden></span>Estás cordialmente invitado<br>a celebrar los</p>
+
+      <div class="cover__numeral">
+        <span class="numeral">22</span>
+        <svg class="cover__bow" aria-hidden="true"><use href="#bow"/></svg>
+      </div>
+
+      <p class="cover__of">años de</p>
+      <h1 class="cover__name">Angie <em>Silupu</em></h1>
+
+      <p class="cover__date">
+        <span>Viernes</span>
+        <span class="cover__date-dot" aria-hidden="true"></span>
+        <span>27 de Noviembre</span>
+      </p>
+
+      <button class="envelope" id="openBtn" type="button" aria-label="Abrir invitación">
+        <img class="envelope__img" src="assets/fotos/sobre.jpg" width="735" height="462" alt="">
+        <span class="envelope__seal" aria-hidden="true"></span>
+        <span class="envelope__shine" aria-hidden="true"></span>
+      </button>
+      <p class="cover__hint"><span class="cover__hint-main">Toca el sobre para abrir</span><span class="cover__hint-sub">Mejor con sonido ♪</span></p>
+    </div>
+  </section>
+
+  <!-- Fondo fijo de la invitación (assets/fotos/fondo-invitacion.jpg) -->
+  <div class="inv-bg" aria-hidden="true"></div>
+
+  <!-- Confeti al abrir -->
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
+  <!-- =====================================================
+       ETAPA 2 · LA INVITACIÓN DESPLEGADA
+       ===================================================== -->
+  <main class="invitation" id="invitation" aria-hidden="true" inert>
+
+    <!-- 1. HERO CELEBRACIÓN (tarjeta sobre el fondo de piscina) -->
+    <section class="section hero" aria-labelledby="heroTitle">
+      <div class="hero__card">
+      <svg class="hero__tide" aria-hidden="true"><use href="#tide"/></svg>
+      <div class="hero__inner">
+        <p class="eyebrow" data-reveal>Una noche junto al mar · Piura</p>
+
+        <h2 class="hero__title" id="heroTitle" tabindex="-1" data-reveal>
+          <span class="hero__num" aria-hidden="true">22</span>
+          <span class="hero__word">Años</span>
+          <span class="sr-only">22 años de Angie Silupu</span>
+        </h2>
+
+        <p class="hero__name" data-reveal aria-hidden="true">Angie <em>Silupu</em></p>
+
+        <div class="bow-divider" data-reveal aria-hidden="true">
+          <svg><use href="#bow"/></svg>
+        </div>
+
+        <p class="hero__dedication" data-reveal>
+          Veintidós vueltas al sol, y esta la quiero celebrar con la gente que hace que todo valga la pena.
+          Habrá brindis, buena música, el mar de fondo y alguna historia que contar al día siguiente.
+          Ven tal como eres: lo único obligatorio es llegar con ganas de celebrar.
+        </p>
+        <p class="hero__sign" data-reveal>Con cariño, Angie</p>
+      </div>
+      </div>
+      <a class="hero__scroll" href="#galleryTitle" aria-label="Ver más">
+        <span>Desliza</span><i aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <!-- 2. GALERÍA EDITORIAL / LOOKBOOK -->
+    <section class="section wine gallery" aria-labelledby="galleryTitle">
+      <div class="container">
+        <header class="section-head section-head--split">
+          <div>
+            <p class="eyebrow" data-reveal>Capítulo II</p>
+            <h2 class="section-title" id="galleryTitle" data-reveal>Lookbook <em>de una</em><br>cumpleañera</h2>
+          </div>
+          <p class="section-note" data-reveal>Retratos de hora dorada, sal en el aire y seda color vino. Un adelanto de la noche.</p>
+        </header>
+
+        <div class="lookbook" id="lookbook" data-reveal>
+          <figure class="look look--1">
+            <img src="assets/fotos/angie-1.jpg" width="854" height="1280"
+                 alt="Angie con corona sosteniendo una bengala encendida y su torta de cumpleaños, rodeada de globos dorados y rojos" loading="lazy" decoding="async">
+            <figcaption><span>01</span>La chispa</figcaption>
+          </figure>
+
+          <figure class="look look--2">
+            <img src="assets/fotos/angie-2.jpg" width="821" height="1021"
+                 alt="Angie sonriendo con su torta de feliz cumpleaños 22" loading="lazy" decoding="async">
+            <figcaption><span>02</span>Dulces 22</figcaption>
+          </figure>
+
+          <figure class="look look--3">
+            <img src="assets/fotos/angie-3.jpg" width="819" height="1022"
+                 alt="Angie con vestido de encaje color vino posando junto a un banco" loading="lazy" decoding="async">
+            <figcaption><span>03</span>Reina de la noche</figcaption>
+          </figure>
+        </div>
+
+        <div class="dots" id="lookbookDots" role="tablist" aria-label="Fotos de la galería"></div>
+      </div>
+    </section>
+
+    <!-- INTERLUDIO · ventana al fondo de piscina -->
+    <section class="interlude" aria-label="Frase">
+      <div class="interlude__inner">
+        <p class="eyebrow eyebrow--gold" data-reveal>Viernes 27 · Noviembre</p>
+        <p class="interlude__quote" data-reveal>Sol, sal<br>y <em>veintidós</em> velas</p>
+      </div>
+    </section>
+
+    <!-- 3. COORDENADAS DEL EVENTO -->
+    <section class="section paper event" aria-labelledby="eventTitle">
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="eyebrow" data-reveal>Capítulo III</p>
+          <h2 class="section-title" id="eventTitle" data-reveal>Las <em>coordenadas</em></h2>
+        </header>
+
+        <div class="countdown" id="countdown" data-reveal>
+          <div class="countdown__grid" aria-hidden="true">
+            <div class="countdown__unit"><span class="countdown__num" data-unit="d">00</span><span class="countdown__label">Días</span></div>
+            <div class="countdown__unit"><span class="countdown__num" data-unit="h">00</span><span class="countdown__label">Horas</span></div>
+            <div class="countdown__unit"><span class="countdown__num" data-unit="m">00</span><span class="countdown__label">Minutos</span></div>
+            <div class="countdown__unit"><span class="countdown__num" data-unit="s">00</span><span class="countdown__label">Segundos</span></div>
+          </div>
+          <p class="countdown__status" id="countdownStatus" aria-live="polite"></p>
+        </div>
+
+        <dl class="details" data-reveal>
+          <div class="details__item">
+            <dt>Fecha</dt>
+            <dd>Viernes 27<br><em>de noviembre</em></dd>
+          </div>
+          <div class="details__item">
+            <dt>Hora</dt>
+            <!-- La hora se toma de EVENT_CONFIG.timeLabel en app.js -->
+            <dd><span data-event-time>8:00 p. m.</span><br><em>hasta que el mar lo diga</em></dd>
+          </div>
+          <div class="details__item">
+            <dt>Lugar</dt>
+            <dd>Costa de Piura<br><em>frente al mar</em></dd>
+          </div>
+        </dl>
+
+        <article class="loc-card" data-reveal aria-labelledby="locTitle">
+          <svg class="loc-card__tide" aria-hidden="true"><use href="#tide"/></svg>
+          <div class="loc-card__info">
+            <p class="eyebrow eyebrow--gold">Ubicación exacta</p>
+            <h3 class="loc-card__title" id="locTitle">Te esperamos <em>aquí</em></h3>
+            <p class="loc-card__coords" id="coordsText">5°01'08.8"S&nbsp;&nbsp;81°03'42.9"W</p>
+            <p class="loc-card__note">Lat −5.0191 · Long −81.0619</p>
+          </div>
+          <div class="loc-card__actions">
+            <a class="btn btn--gold" id="mapsBtn" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/place/5%C2%B001'08.8%22S+81%C2%B003'42.9%22W/@-5.0191183,-81.0644951,940m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d-5.0191183!4d-81.0619202?hl=es&entry=ttu&g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D">
+              <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              Ver ubicación en Google Maps
+            </a>
+            <button class="btn btn--ghost" id="copyBtn" type="button">
+              <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="12" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5 16V4h11" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span class="btn__label">Copiar coordenadas</span>
+            </button>
+            <a class="btn btn--ghost" id="wazeBtn" target="_blank" rel="noopener"
+               href="https://waze.com/ul?ll=-5.0191183,-81.0619202&navigate=yes">
+              <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15c-1-1-1.5-3-1-5a8 8 0 0 1 15.5-1.5c1 3-.5 6.5-3.5 7.5H9c-1.5 0-3-.3-5-1Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="18.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="15" cy="18.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              Cómo llegar con Waze
+            </a>
+            <span class="sr-only" id="copyStatus" aria-live="polite"></span>
+          </div>
+        </article>
+
+        <!-- Agendar en el calendario -->
+        <div class="calendar" data-reveal>
+          <p class="calendar__title">Que no se te olvide</p>
+          <div class="calendar__actions">
+            <a class="btn btn--outline" id="gcalBtn" target="_blank" rel="noopener" href="#">
+              <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 9.5h17M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              Google Calendar
+            </a>
+            <button class="btn btn--outline" id="icsBtn" type="button">
+              <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              iPhone / Outlook
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. RSVP & LIBRO DE DESEOS -->
+    <section class="section night rsvp" aria-labelledby="rsvpTitle">
+      <svg class="rsvp__tide" aria-hidden="true"><use href="#tide"/></svg>
+      <div class="container rsvp__inner">
+        <header class="section-head section-head--center">
+          <p class="eyebrow eyebrow--gold" data-reveal>Capítulo IV</p>
+          <h2 class="section-title" id="rsvpTitle" data-reveal>Confirma tu <em>asistencia</em></h2>
+          <p class="section-note section-note--center" data-reveal>Y si quieres, déjale unas palabras a Angie. Las leerá todas.</p>
+          <p class="guest-count" id="guestCount" hidden data-reveal>
+            <span class="guest-count__num" id="guestCountNum">0</span>
+            <span class="guest-count__label">invitados ya confirmaron</span>
+          </p>
+        </header>
+
+        <form class="rsvp-form" id="rsvpForm" novalidate data-reveal>
+          <!-- Honeypot anti-spam (no tocar) -->
+          <div class="hp" aria-hidden="true">
+            <label for="website">No llenar</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="field" data-field="nombre">
+            <label class="field__label" for="nombre">Nombre y apellido</label>
+            <input class="field__input" id="nombre" name="nombre" type="text" autocomplete="name"
+                   autocapitalize="words" enterkeyhint="next" maxlength="80" required
+                   placeholder="Ej. Valeria Castillo" aria-describedby="nombreError">
+            <p class="field__error" id="nombreError" aria-live="polite"></p>
+          </div>
+
+          <fieldset class="field field--choices" data-field="asistencia" aria-describedby="asistenciaError">
+            <legend class="field__label">¿Nos acompañas?</legend>
+            <div class="choice-grid">
+              <label class="choice">
+                <input type="radio" name="asistencia" value="Sí" required>
+                <span class="choice__box">
+                  <span class="choice__title">Sí, ahí estaré</span>
+                  <span class="choice__sub">Cuenta conmigo</span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="asistencia" value="No">
+                <span class="choice__box">
+                  <span class="choice__title">No podré asistir</span>
+                  <span class="choice__sub">Brindaré desde lejos</span>
+                </span>
+              </label>
+            </div>
+            <p class="field__error" id="asistenciaError" aria-live="polite"></p>
+          </fieldset>
+
+          <fieldset class="field field--segmented" id="companionsField" data-field="acompanantes">
+            <legend class="field__label">Acompañantes</legend>
+            <div class="segmented">
+              <label class="segment"><input type="radio" name="acompanantes" value="Solo yo" checked><span>Solo yo</span></label>
+              <label class="segment"><input type="radio" name="acompanantes" value="+1"><span>+1</span></label>
+              <label class="segment"><input type="radio" name="acompanantes" value="+2"><span>+2</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field" data-field="mensaje">
+            <label class="field__label" for="mensaje">Mensaje o dedicatoria para Angie <span class="field__optional">(opcional)</span></label>
+            <textarea class="field__input field__input--area" id="mensaje" name="mensaje" rows="4" maxlength="300"
+                      placeholder="Lo que le dirías en un brindis…" aria-describedby="mensajeCount"></textarea>
+            <p class="field__counter" id="mensajeCount"><span id="mensajeChars">0</span> / 300</p>
+          </div>
+
+          <div class="form-alert" id="formAlert" role="alert" hidden>
+            <p id="formAlertText"></p>
+          </div>
+
+          <button class="btn btn--gold btn--block btn--submit" id="submitBtn" type="submit">
+            <span class="spinner" aria-hidden="true"></span>
+            <span class="btn__label" id="submitLabel">Enviar confirmación</span>
+          </button>
+        </form>
+
+        <!-- Tarjeta de confirmación -->
+        <div class="success" id="rsvpSuccess" hidden>
+          <svg class="success__bow" aria-hidden="true"><use href="#bow"/></svg>
+          <p class="eyebrow eyebrow--gold">Respuesta recibida</p>
+          <h3 class="success__title" id="successTitle" tabindex="-1">Gracias, <em id="successName">querida</em></h3>
+          <p class="success__text" id="successText"></p>
+          <button class="btn btn--ghost" id="rsvpAgain" type="button">Enviar otra respuesta</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <footer class="footer night">
+      <div class="seal" aria-hidden="true">
+        <svg><use href="#bow"/></svg>
+      </div>
+      <p class="footer__mono">A · S &nbsp;—&nbsp; 27 · 11 · 2026</p>
+      <p class="footer__line">Nos vemos frente al mar.</p>
+      <a class="btn btn--ghost footer__share" id="shareBtn" target="_blank" rel="noopener" href="#">
+        <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7L4 20Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        Compartir por WhatsApp
+      </a>
+      <p class="footer__credit">Desarrollado por MAFC SOFTWARE EIRL</p>
+    </footer>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
