@@ -454,39 +454,76 @@ function initGallery() {
   const looks = $$('.look', track);
   if (!track || !dotsWrap || !looks.length) return;
 
+  // Carrusel 3D automático: avanza solo cada GALLERY_INTERVAL ms
+  const GALLERY_INTERVAL = 2000;
+  const n = looks.length;
+  let current = 0;
+  let timer = 0;
+  let hovering = false;
+  let offscreen = false;
+  track.classList.add('is-carousel');
+
   const dots = looks.map((look, i) => {
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.className = 'dot';
     dot.setAttribute('role', 'tab');
-    dot.setAttribute('aria-label', `Foto ${i + 1} de ${looks.length}`);
-    dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-    dot.addEventListener('click', () => {
-      const padding = parseFloat(getComputedStyle(track).paddingLeft) || 0;
-      track.scrollTo({ left: look.offsetLeft - padding, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-    });
+    dot.setAttribute('aria-label', `Foto ${i + 1} de ${n}`);
+    dot.addEventListener('click', () => { go(i); restart(); });
     dotsWrap.appendChild(dot);
     return dot;
   });
 
-  let ticking = false;
-  const update = () => {
-    ticking = false;
-    const padding = parseFloat(getComputedStyle(track).paddingLeft) || 0;
-    const x = track.scrollLeft + padding;
-    let active = 0;
-    let best = Infinity;
+  function go(index) {
+    current = (index + n) % n;
     looks.forEach((look, i) => {
-      const d = Math.abs(look.offsetLeft - x);
-      if (d < best) { best = d; active = i; }
+      let offset = i - current;
+      if (offset > n / 2) offset -= n;
+      if (offset < -n / 2) offset += n;
+      look.dataset.pos = offset === 0 ? 'active' : offset === -1 ? 'prev' : offset === 1 ? 'next' : 'hidden';
+      look.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
     });
-    // Al llegar al final, marca la última
-    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) active = looks.length - 1;
-    dots.forEach((dot, i) => dot.setAttribute('aria-selected', i === active ? 'true' : 'false'));
-  };
-  track.addEventListener('scroll', () => {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
-  }, { passive: true });
+    dots.forEach((dot, i) => dot.setAttribute('aria-selected', i === current ? 'true' : 'false'));
+  }
+  const next = () => go(current + 1);
+  const prev = () => go(current - 1);
+
+  function restart() {
+    clearInterval(timer);
+    if (!hovering && !offscreen && !document.hidden && !prefersReducedMotion) {
+      timer = setInterval(next, GALLERY_INTERVAL);
+    }
+  }
+
+  // Clic en una foto lateral: la trae al centro
+  looks.forEach((look, i) => look.addEventListener('click', () => {
+    if (look.dataset.pos !== 'active') { go(i); restart(); }
+  }));
+
+  // Deslizar con el dedo o el mouse
+  let startX = 0;
+  let dragging = false;
+  track.addEventListener('pointerdown', (e) => { dragging = true; startX = e.clientX; });
+  window.addEventListener('pointerup', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 40) { if (dx < 0) next(); else prev(); restart(); }
+  });
+
+  // Pausa con el mouse encima, fuera de pantalla o con la pestaña oculta
+  track.addEventListener('mouseenter', () => { hovering = true; restart(); });
+  track.addEventListener('mouseleave', () => { hovering = false; restart(); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      offscreen = !entry.isIntersecting;
+      restart();
+    }, { threshold: 0.2 }).observe(track);
+  }
+  document.addEventListener('visibilitychange', restart);
+
+  go(0);
+  restart();
 }
 
 /* --------------------------------------------------------------------------

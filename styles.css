@@ -217,7 +217,7 @@ em { font-style: italic; }
   width: 100vw;
   background:
     linear-gradient(to bottom, rgba(22, 7, 10, 0.35) 0%, rgba(22, 7, 10, 0.05) 30%, rgba(22, 7, 10, 0.1) 60%, rgba(22, 7, 10, 0.6) 100%),
-    url("assets/fotos/fondo-portada.jpg") center 62% / cover no-repeat;
+    url("assets/fotos/fondo-tropical.jpg") center top / cover no-repeat;
   animation: kenburns 24s ease-in-out infinite alternate;
 }
 .cover__flap--left  .cover__bg { left: 0;  transform-origin: 100% 60%; }
@@ -342,7 +342,7 @@ em { font-style: italic; }
   min-width: 0;
   padding: clamp(1.5rem, 4dvh, 2.5rem) clamp(1.25rem, 5vw, 2.5rem) clamp(1.25rem, 3dvh, 2rem);
   /* Sin desenfoque: velo vino muy suave para que la playa se vea nítida */
-  background: radial-gradient(85% 70% at 50% 50%, rgba(40, 8, 15, 0.42), rgba(40, 8, 15, 0.18) 75%, rgba(40, 8, 15, 0.08));
+  background: radial-gradient(85% 70% at 50% 50%, rgba(60, 10, 22, 0.6), rgba(60, 10, 22, 0.32) 75%, rgba(60, 10, 22, 0.15));
   border: 1px solid rgba(243, 221, 176, 0.65);
   border-radius: 2px;
   text-shadow: 0 2px 10px rgba(22, 7, 10, 0.75), 0 0 2px rgba(22, 7, 10, 0.6);
@@ -745,7 +745,7 @@ em { font-style: italic; }
   z-index: 0;
   background:
     linear-gradient(to bottom, rgba(22, 7, 10, 0.1), transparent 30%, transparent 70%, rgba(22, 7, 10, 0.35)),
-    url("assets/fotos/fondo-invitacion.jpg") center / cover no-repeat;
+    url("assets/fotos/fondo-tropical.jpg") center top / cover no-repeat;
   opacity: 0;
   transform: scale(1.12);
   transition: opacity 1.6s var(--ease-lux) 0.4s, transform 3.2s var(--ease-lux) 0.4s;
@@ -1727,4 +1727,119 @@ em { font-style: italic; }
   .loc-card__info { grid-column: 1 / -1; }
   .loc-card__actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
   .loc-card__actions .btn { flex: 1 1 14rem; }
+}
+
+/* ==========================================================================
+   GALERÍA · fondo de playa al atardecer + carrusel 3D automático
+   ========================================================================== */
+.gallery {
+  background:
+    linear-gradient(180deg, rgba(40, 6, 14, 0.82) 0%, rgba(60, 10, 22, 0.45) 32%, rgba(40, 6, 14, 0.25) 60%, rgba(30, 5, 10, 0.7) 100%),
+    url("assets/fotos/fondo-galeria.jpg") center 60% / cover no-repeat;
+}
+.gallery .section-title, .gallery .section-note, .gallery .eyebrow { text-shadow: 0 2px 14px rgba(20, 3, 8, 0.7); }
+.gallery .section-note { opacity: 0.95; }
+
+.lookbook.is-carousel {
+  position: relative;
+  display: block;
+  height: clamp(380px, 62vw, 600px);
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  perspective: 1400px;
+  touch-action: pan-y;
+  user-select: none;
+}
+.lookbook.is-carousel .look {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(210px, 52vw, 380px);
+  max-width: none;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  flex: none;
+  margin: 0;
+  cursor: pointer;
+  border: 3px solid rgba(247, 241, 234, 0.92);
+  box-shadow: 0 30px 60px rgba(20, 3, 8, 0.55);
+  transition: transform 0.9s var(--ease-lux), opacity 0.9s var(--ease-lux), filter 0.9s var(--ease-lux);
+  will-change: transform;
+}
+.lookbook.is-carousel .look img { transform: none; pointer-events: none; }
+.lookbook.is-carousel .look[data-pos="active"] {
+  z-index: 3;
+  opacity: 1;
+  cursor: default;
+  transform: translate(-50%, -50%) scale(1);
+}
+.lookbook.is-carousel .look[data-pos="prev"] {
+  z-index: 2;
+  opacity: 0.85;
+  filter: brightness(0.7) saturate(0.85);
+  transform: translate(-50%, -50%) translateX(-62%) scale(0.78) rotateY(28deg) rotate(-4deg);
+}
+.lookbook.is-carousel .look[data-pos="next"] {
+  z-index: 2;
+  opacity: 0.85;
+  filter: brightness(0.7) saturate(0.85);
+  transform: translate(-50%, -50%) translateX(62%) scale(0.78) rotateY(-28deg) rotate(4deg);
+}
+.lookbook.is-carousel .look[data-pos="hidden"] {
+  z-index: 1;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+}
+/* Brillo dorado sobre la foto activa */
+.lookbook.is-carousel .look[data-pos="active"]::after {
+  border-color: rgba(243, 221, 176, 0.75);
+  animation: look-glow 2s ease-in-out infinite;
+}
+@keyframes look-glow {
+  0%, 100% { box-shadow: inset 0 0 0 0 rgba(243, 221, 176, 0); }
+  50%      { box-shadow: inset 0 0 30px 0 rgba(243, 221, 176, 0.25); }
+}
+.lookbook.is-carousel .look figcaption { transition: opacity 0.6s; }
+.lookbook.is-carousel .look:not([data-pos="active"]) figcaption { opacity: 0; }
+
+/* Puntos del carrusel visibles en todas las pantallas */
+.lookbook.is-carousel + .dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+}
+.lookbook.is-carousel + .dots .dot {
+  position: relative;
+  width: 32px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.lookbook.is-carousel + .dots .dot::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 14px;
+  height: 2px;
+  background: var(--text-light);
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s var(--ease-lux), opacity 0.5s, background-color 0.5s;
+}
+.lookbook.is-carousel + .dots .dot[aria-selected="true"]::before { width: 30px; opacity: 1; background: var(--sand-gold); }
+
+@media (max-width: 767px) {
+  .lookbook.is-carousel { height: clamp(330px, 92vw, 460px); }
+  .lookbook.is-carousel .look { width: 64vw; }
+  .lookbook.is-carousel .look[data-pos="prev"] { transform: translate(-50%, -50%) translateX(-48%) scale(0.72) rotateY(30deg) rotate(-4deg); }
+  .lookbook.is-carousel .look[data-pos="next"] { transform: translate(-50%, -50%) translateX(48%) scale(0.72) rotateY(-30deg) rotate(4deg); }
+}
+
+/* Frase sobre el nuevo fondo claro: velo vino para que el texto se lea */
+.interlude__inner {
+  background: rgba(92, 17, 32, 0.55);
+  border-color: rgba(243, 221, 176, 0.7);
 }

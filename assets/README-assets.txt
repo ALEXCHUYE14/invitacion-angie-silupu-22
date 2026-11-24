@@ -6,8 +6,9 @@ ASSETS · Invitación Angie Silupu · 22
    - ¿Otra canción o saltar la intro? Edita app.js → AUDIO_CONFIG.src / AUDIO_CONFIG.startAt
 
 2) FOTOS (assets/fotos/)
-   fondo-portada.jpg     → playa: fondo de la portada (se abre en dos puertas)
-   fondo-invitacion.jpg  → piscina con palmeras: fondo fijo al entrar a la invitación
+   fondo-portada.jpg     → (ya no se usa) playa anterior de la portada
+   fondo-tropical.jpg    → flores, palmera y letrero: fondo de la portada y fondo fijo de la invitación
+   fondo-galeria.jpg     → playa al atardecer: fondo de la galería de fotos (carrusel)
    angie-1.jpg           → galería 01 "La chispa"
    angie-2.jpg           → medallón de la portada + galería 02 "Dulces 22" + vista previa WhatsApp
    angie-3.jpg           → galería 03 "Reina de la noche"
