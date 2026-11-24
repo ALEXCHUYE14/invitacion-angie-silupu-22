@@ -1661,3 +1661,26 @@ em { font-style: italic; }
   color: transparent;
 }
 .gift input:checked + .gift__box .gift__check { background: var(--sand-gold); border-color: var(--sand-gold); color: var(--text-dark); }
+
+/* Sello del pie: lazo rojo de satén */
+.seal {
+  width: 8rem;
+  height: 8rem;
+  margin-bottom: 2rem;
+  background: radial-gradient(circle, rgba(128, 24, 44, 0.35), transparent 70%);
+  box-shadow: 0 0 40px rgba(201, 166, 121, 0.12);
+}
+.seal__bow {
+  position: relative;
+  z-index: 1;
+  width: 6rem;
+  max-width: none;
+  height: auto;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.5));
+  transform-origin: 50% 30%;
+  animation: seal-bow 5s ease-in-out infinite;
+}
+@keyframes seal-bow {
+  0%, 100% { transform: rotate(-4deg) scale(1); }
+  50%      { transform: rotate(4deg) scale(1.04); }
+}
