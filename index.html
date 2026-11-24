@@ -13,7 +13,11 @@
   <meta property="og:title" content="Angie Silupu · 22 años">
   <meta property="og:description" content="Viernes 27 de noviembre · Costa de Piura. Abre tu invitación.">
   <!-- Al publicar, cambia esto por la URL absoluta: https://tu-dominio/assets/fotos/angie-2.jpg -->
-  <meta property="og:image" content="assets/fotos/angie-2.jpg">
+  <meta property="og:url" content="https://invitacion-angie-silupu.vercel.app/">
+  <meta property="og:image" content="https://invitacion-angie-silupu.vercel.app/assets/fotos/angie-2.jpg">
+  <meta property="og:image:width" content="821">
+  <meta property="og:image:height" content="1021">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" as="image" href="assets/fotos/fondo-portada.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -95,6 +99,7 @@
     </div>
 
     <div class="cover__inner">
+      <img class="ribbon ribbon--cover" src="assets/fotos/lazo-grande.png" alt="" aria-hidden="true">
       <div class="portrait" role="img" aria-label="Foto de Angie con su corona">
         <span class="portrait__photo"></span>
       </div>
@@ -138,6 +143,7 @@
     <!-- 1. HERO CELEBRACIÓN (tarjeta sobre el fondo de piscina) -->
     <section class="section hero" aria-labelledby="heroTitle">
       <div class="hero__card">
+      <img class="ribbon ribbon--hero" src="assets/fotos/lazo-grande.png" alt="" aria-hidden="true">
       <svg class="hero__tide" aria-hidden="true"><use href="#tide"/></svg>
       <div class="hero__inner">
         <p class="eyebrow" data-reveal>Una noche junto al mar · Piura</p>
@@ -212,6 +218,7 @@
 
     <!-- 3. COORDENADAS DEL EVENTO -->
     <section class="section paper event" aria-labelledby="eventTitle">
+      <img class="ribbon ribbon--event" src="assets/fotos/lazo-cinta.png" alt="" aria-hidden="true" loading="lazy">
       <div class="container">
         <header class="section-head section-head--center">
           <p class="eyebrow" data-reveal>Capítulo III</p>
@@ -345,6 +352,13 @@
               <label class="segment"><input type="radio" name="acompanantes" value="+1"><span>+1</span></label>
               <label class="segment"><input type="radio" name="acompanantes" value="+2"><span>+2</span></label>
             </div>
+          </fieldset>
+
+          <!-- Ideas de regalo (se configuran en app.js → GIFTS) -->
+          <fieldset class="field field--gifts" data-field="regalo">
+            <legend class="field__label">Ideas de regalo <span class="field__optional">(opcional)</span></legend>
+            <p class="gifts__intro">Si quieres sorprenderla, estas son sus cosas favoritas. Marca lo que piensas llevar y así evitamos regalos repetidos.</p>
+            <div class="gifts" id="gifts"></div>
           </fieldset>
 
           <div class="field" data-field="mensaje">

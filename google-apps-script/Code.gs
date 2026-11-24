@@ -12,7 +12,7 @@
  */
 const SPREADSHEET_ID = '1q7fHTTMMDMy7xhvBpFIQijSL_StoA7X6wW9VRuUaNyc';
 const SHEET_NAME = 'Confirmaciones';
-const HEADERS = ['Fecha/Hora', 'Nombre', 'Asistencia', 'Acompañantes', 'Total personas', 'Mensaje'];
+const HEADERS = ['Fecha/Hora', 'Nombre', 'Asistencia', 'Acompañantes', 'Total personas', 'Mensaje', 'Regalo'];
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -32,9 +32,10 @@ function doPost(e) {
     const acomp = asistencia === 'Sí' ? (['Solo yo', '+1', '+2'].indexOf(data.acompanantes) >= 0 ? data.acompanantes : 'Solo yo') : '—';
     const total = asistencia === 'Sí' ? 1 + (acomp === '+1' ? 1 : acomp === '+2' ? 2 : 0) : 0;
     const mensaje = clean_(data.mensaje, 500);
+    const regalo = clean_(data.regalo, 200);
 
     const sheet = getSheet_();
-    sheet.appendRow([new Date(), nombre, asistencia, "'" + acomp, total, mensaje]);
+    sheet.appendRow([new Date(), nombre, asistencia, "'" + acomp, total, mensaje, regalo]);
     sheet.getRange(sheet.getLastRow(), 1).setNumberFormat('dd/mm/yyyy hh:mm:ss');
 
     return json_({ ok: true, stats: stats_(sheet) });

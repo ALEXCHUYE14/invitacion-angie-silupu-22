@@ -34,8 +34,28 @@ const EVENT_CONFIG = {
 // Hoja: https://docs.google.com/spreadsheets/d/1q7fHTTMMDMy7xhvBpFIQijSL_StoA7X6wW9VRuUaNyc/edit
 // Si se deja vacía, el formulario funciona en MODO DEMO (simula el envío).
 const SHEETS_CONFIG = {
-  endpoint: 'https://script.google.com/macros/s/AKfycbyfenDldAxtVt4y5nOVG5ITtEJe_ITJac1_yPYeZB3OOF8wmTgqwssnbl4thxMvKQ2x/exec',
+  endpoint: 'https://script.google.com/macros/s/AKfycbzC5LSd3yU_VWvzh_sm8vKJh-Yc32CCatpOmas9cIY-jXIk5c6GP53SQ18AobUQIIx1/exec',
   timeoutMs: 15000,
+};
+
+// Ideas de regalo que se muestran en el formulario.
+// "detalle" es opcional: ej. 'Talla S' o 'Talla 37'. Déjalo vacío si no aplica.
+const GIFTS = [
+  { id: 'perfume',    nombre: 'Perfume',    detalle: '', icon: 'perfume' },
+  { id: 'bisuteria',  nombre: 'Bisutería',  detalle: '', icon: 'jewel' },
+  { id: 'maquillaje', nombre: 'Maquillaje', detalle: '', icon: 'makeup' },
+  { id: 'ropa',       nombre: 'Ropa',       detalle: '', icon: 'dress' },
+  { id: 'calzado',    nombre: 'Calzado',    detalle: '', icon: 'heel' },
+  { id: 'sorpresa',   nombre: 'Sorpresa',   detalle: 'Lo que nazca del corazón', icon: 'gift' },
+];
+
+const GIFT_ICONS = {
+  perfume: '<rect x="6" y="9" width="12" height="12" rx="2.5"/><path d="M9.5 9V6.5h5V9M10.5 6.5V4h3v2.5M18 4.5h1.5M18.5 2.8l1.2-.8M18.5 6.2l1.2.8"/><path d="M9 14.5h6"/>',
+  jewel: '<path d="M4 3c0 6 3.5 9.5 8 9.5S20 9 20 3"/><path d="M12 12.5l-2.2 2.8L12 20l2.2-4.7z"/><circle cx="4.5" cy="15" r="1.3"/><path d="M4.5 13.7v-2"/><circle cx="19.5" cy="15" r="1.3"/><path d="M19.5 13.7v-2"/>',
+  makeup: '<path d="M6 21V12h4v9z"/><path d="M6.5 12V8.5L9.5 6v6"/><path d="M15 21v-6.5h3V21z"/><path d="M15.2 14.5c0-3 .5-6 1.3-9 .8 3 1.3 6 1.3 9"/>',
+  dress: '<path d="M9 3l1 3.5h4L15 3"/><path d="M10 6.5L8.5 10l1.5 1-4 10h12l-4-10 1.5-1L14 6.5"/>',
+  heel: '<path d="M3 18.5c0-1.7 1.3-2.8 3.2-3.1 1.7-.3 3.1-1 4.3-2.4l3.4-4c.7-.8 1.9-.7 2.4.2l3.2 5.6c.3.5.5 1.1.5 1.7v2H3z"/><path d="M19.5 18.5l-.6 3"/><path d="M8 15.3l1.6 3.2"/>',
+  gift: '<rect x="4" y="10" width="16" height="11" rx="1"/><path d="M3 7h18v3H3zM12 7v14"/><path d="M12 7c-1.5-3-5-3.5-5-1.5S10 7 12 7zM12 7c1.5-3 5-3.5 5-1.5S14 7 12 7z"/>',
 };
 
 /* --------------------------------------------------------------------------
@@ -577,7 +597,23 @@ function initCopy() {
 /* --------------------------------------------------------------------------
    RSVP · validación en tiempo real + envío a Google Sheets
    -------------------------------------------------------------------------- */
+function renderGifts() {
+  const wrap = document.getElementById('gifts');
+  if (!wrap) return;
+  wrap.innerHTML = GIFTS.map((g) => `
+    <label class="gift">
+      <input type="checkbox" name="regalo" value="${g.nombre}${g.detalle ? ' (' + g.detalle + ')' : ''}">
+      <span class="gift__box">
+        <span class="gift__check" aria-hidden="true">✓</span>
+        <span class="gift__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${GIFT_ICONS[g.icon] || GIFT_ICONS.gift}</svg></span>
+        <span class="gift__name">${g.nombre}</span>
+        ${g.detalle ? `<span class="gift__detail">${g.detalle}</span>` : ''}
+      </span>
+    </label>`).join('');
+}
+
 function initRSVP() {
+  renderGifts();
   const form = $('#rsvpForm');
   const nameInput = $('#nombre');
   const msgInput = $('#mensaje');
@@ -721,6 +757,7 @@ function initRSVP() {
       asistencia,
       acompanantes: asistencia === 'Sí' ? form.querySelector('input[name="acompanantes"]:checked').value : '—',
       mensaje: msgInput.value.trim().slice(0, MAX_MSG),
+      regalo: Array.from(form.querySelectorAll('input[name="regalo"]:checked')).map((i) => i.value).join(', '),
       website: '',
     };
 

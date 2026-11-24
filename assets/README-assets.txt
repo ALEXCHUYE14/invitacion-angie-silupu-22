@@ -12,6 +12,10 @@ ASSETS · Invitación Angie Silupu · 22
    angie-2.jpg           → medallón de la portada + galería 02 "Dulces 22" + vista previa WhatsApp
    angie-3.jpg           → galería 03 "Reina de la noche"
    sobre.jpg             → botón para abrir la invitación (sobre con sello)
+   lazo-grande.png       → lazo de satén (portada y tarjeta principal), fondo transparente
+   lazo-cinta.png        → cinta con lazo (sección de coordenadas), fondo transparente
+
+3) REGALOS → app.js → GIFTS (nombre, detalle opcional como talla)
 
    - Para cambiar una foto, reemplaza el archivo con el mismo nombre.
    - og:image en index.html debe ser una URL absoluta al publicar (https://tu-dominio/...).
